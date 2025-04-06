@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "ci": "payload migrate && pnpm build",
     "build": "next build",
     "postbuild": "next-sitemap --config next-sitemap.config.cjs",
     "i:build": "infisical run pnpm build",
