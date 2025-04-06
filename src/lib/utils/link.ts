@@ -1,7 +1,9 @@
 import { slugify } from '@/lib/utils/slugify';
-import type { PayloadLinkGroupField } from '@/payload/payload-types';
+import type { PayloadLinkArrayField } from '@/payload/payload-types';
 
-export const internalLink = (link: PayloadLinkGroupField) => {
+export type PayloadLinkField = NonNullable<PayloadLinkArrayField>[number];
+
+export const internalLink = (link: PayloadLinkField) => {
   if (typeof link.relationship === 'string' || !link.relationship?.breadcrumbs) {
     return '/';
   }
@@ -12,7 +14,7 @@ export const internalLink = (link: PayloadLinkGroupField) => {
   return `${url === '/home' ? '/' : url}${anchor}`;
 };
 
-export const linkProps = (link: PayloadLinkGroupField) => {
+export const linkProps = (link: PayloadLinkField) => {
   const href = link.type === 'internal' && link.relationship ? internalLink(link) : link.url;
   const rel = link.rel && link.rel.length > 0 ? { rel: link.rel.join(',') } : {};
 

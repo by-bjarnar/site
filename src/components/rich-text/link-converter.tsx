@@ -3,8 +3,8 @@ import Link from 'next/link';
 
 import type { JSXConverter } from '@/components/rich-text';
 import { cn } from '@/lib/utils/cn';
+import type { PayloadLinkField } from '@/lib/utils/link';
 import { linkProps } from '@/lib/utils/link';
-import type { PayloadLinkGroupField } from '@/payload/payload-types';
 
 export const linkConverter: JSXConverter<SerializedLinkNode> = ({
   additionalClass,
@@ -14,7 +14,7 @@ export const linkConverter: JSXConverter<SerializedLinkNode> = ({
   parent,
 }) => (
   <Link
-    {...linkProps(node.fields as unknown as PayloadLinkGroupField)}
+    {...linkProps(node.fields as unknown as PayloadLinkField)}
     className={overrideClass || cn(additionalClass)}
   >
     {nodesToJSX({ nodes: node.children, parent })}
