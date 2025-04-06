@@ -1,0 +1,22 @@
+import type { SerializedLinkNode } from '@payloadcms/richtext-lexical';
+import Link from 'next/link';
+
+import type { JSXConverter } from '@/components/rich-text';
+import { cn } from '@/lib/utils/cn';
+import type { PayloadLinkField } from '@/lib/utils/link';
+import { linkProps } from '@/lib/utils/link';
+
+export const linkConverter: JSXConverter<SerializedLinkNode> = ({
+  additionalClass,
+  node,
+  nodesToJSX,
+  overrideClass,
+  parent,
+}) => (
+  <Link
+    {...linkProps(node.fields as unknown as PayloadLinkField)}
+    className={overrideClass || cn(additionalClass)}
+  >
+    {nodesToJSX({ nodes: node.children, parent })}
+  </Link>
+);
