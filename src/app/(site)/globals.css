@@ -1,1 +1,137 @@
+/* stylelint-disable custom-property-pattern */
 @import 'tailwindcss';
+
+/* Colors are from Radix UI (https://github.com/radix-ui/colors) */
+:root {
+  /* gold */
+  --ds-gold-1: #fdfdfc;
+  --ds-gold-2: #faf9f2;
+  --ds-gold-3: #f2f0e7;
+  --ds-gold-4: #eae6db;
+  --ds-gold-5: #e1dccf;
+  --ds-gold-6: #d8d0bf;
+  --ds-gold-7: #cbc0aa;
+  --ds-gold-8: #b9a88d;
+  --ds-gold-9: #978365;
+  --ds-gold-10: #8c7a5e;
+  --ds-gold-11: #71624b;
+  --ds-gold-12: #3b352b;
+
+  /* green */
+  --ds-green-1: #fbfefc;
+  --ds-green-2: #f4fbf6;
+  --ds-green-3: #e6f6eb;
+  --ds-green-4: #d6f1df;
+  --ds-green-5: #c4e8d1;
+  --ds-green-6: #adddc0;
+  --ds-green-7: #8eceaa;
+  --ds-green-8: #5bb98b;
+  --ds-green-9: #30a46c;
+  --ds-green-10: #2b9a66;
+  --ds-green-11: #218358;
+  --ds-green-12: #193b2d;
+}
+
+@media (color-gamut: p3) {
+  @supports (color: color(display-p3 0 0 0)) {
+    :root {
+      /* gold */
+      --ds-gold-1: color(display-p3 0.992 0.992 0.989);
+      --ds-gold-2: color(display-p3 0.98 0.976 0.953);
+      --ds-gold-3: color(display-p3 0.947 0.94 0.909);
+      --ds-gold-4: color(display-p3 0.914 0.904 0.865);
+      --ds-gold-5: color(display-p3 0.88 0.865 0.816);
+      --ds-gold-6: color(display-p3 0.84 0.818 0.756);
+      --ds-gold-7: color(display-p3 0.788 0.753 0.677);
+      --ds-gold-8: color(display-p3 0.715 0.66 0.565);
+      --ds-gold-9: color(display-p3 0.579 0.517 0.41);
+      --ds-gold-10: color(display-p3 0.538 0.479 0.38);
+      --ds-gold-11: color(display-p3 0.433 0.386 0.305);
+      --ds-gold-12: color(display-p3 0.227 0.209 0.173);
+
+      /* green */
+      --ds-green-1: color(display-p3 0.986 0.996 0.989);
+      --ds-green-2: color(display-p3 0.963 0.983 0.967);
+      --ds-green-3: color(display-p3 0.913 0.964 0.925);
+      --ds-green-4: color(display-p3 0.859 0.94 0.879);
+      --ds-green-5: color(display-p3 0.796 0.907 0.826);
+      --ds-green-6: color(display-p3 0.718 0.863 0.761);
+      --ds-green-7: color(display-p3 0.61 0.801 0.675);
+      --ds-green-8: color(display-p3 0.451 0.715 0.559);
+      --ds-green-9: color(display-p3 0.332 0.634 0.442);
+      --ds-green-10: color(display-p3 0.308 0.595 0.417);
+      --ds-green-11: color(display-p3 0.19 0.5 0.32);
+      --ds-green-12: color(display-p3 0.132 0.228 0.18);
+    }
+  }
+}
+
+@theme {
+  /* ----- fonts ----- */
+  --font-serif:
+    var(--font-instrument-serif), serif, ui-serif, georgia, cambria, 'Times New Roman', times, serif;
+  --font-sans:
+    var(--font-instrument-sans), sans-serif, ui-sans-serif, system-ui, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-display: initial;
+  --font-mono: initial;
+
+  /* ----- breakpoints ----- */
+  --breakpoint-xxs: 375px;
+  --breakpoint-xs: 425px;
+  --breakpoint-md-lg: 992px;
+
+  /* ----- colors ----- */
+  --color-*: initial;
+
+  /* gold */
+  --color-gold-1: var(--ds-gold-1);
+  --color-gold-2: var(--ds-gold-2);
+  --color-gold-3: var(--ds-gold-3);
+  --color-gold-4: var(--ds-gold-4);
+  --color-gold-5: var(--ds-gold-5);
+  --color-gold-6: var(--ds-gold-6);
+  --color-gold-7: var(--ds-gold-7);
+  --color-gold-8: var(--ds-gold-8);
+  --color-gold-9: var(--ds-gold-9);
+  --color-gold-10: var(--ds-gold-10);
+  --color-gold-11: var(--ds-gold-11);
+  --color-gold-12: var(--ds-gold-12);
+
+  /* green */
+  --color-green-1: var(--ds-green-1);
+  --color-green-2: var(--ds-green-2);
+  --color-green-3: var(--ds-green-3);
+  --color-green-4: var(--ds-green-4);
+  --color-green-5: var(--ds-green-5);
+  --color-green-6: var(--ds-green-6);
+  --color-green-7: var(--ds-green-7);
+  --color-green-8: var(--ds-green-8);
+  --color-green-9: var(--ds-green-9);
+  --color-green-10: var(--ds-green-10);
+  --color-green-11: var(--ds-green-11);
+  --color-green-12: var(--ds-green-12);
+}
+
+@layer base {
+  *::selection {
+    @apply bg-green-5 text-green-12;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif text-balance text-green-11;
+  }
+
+  a {
+    @apply border-b-2 border-dotted border-b-transparent text-green-11 transition-all hover:border-b-green-11 hover:text-green-11;
+  }
+
+  p {
+    @apply text-pretty;
+  }
+}

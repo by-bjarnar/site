@@ -12,6 +12,35 @@
  */
 export type PayloadUserRolesField = ('admin' | 'editor' | 'public')[];
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PayloadLinkArrayField".
+ */
+export type PayloadLinkArrayField =
+  | {
+      text: string;
+      type: 'internal' | 'external';
+      relationship?: (string | null) | PayloadPagesCollection;
+      anchor?: string | null;
+      url?: string | null;
+      rel?: PayloadRelField;
+      newTab?: boolean | null;
+      umamiEvent?: string | null;
+      umamiEventId?: string | null;
+      icon?: PayloadIconField;
+      id?: string | null;
+    }[]
+  | null;
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PayloadRelField".
+ */
+export type PayloadRelField = ('noopener' | 'noreferrer' | 'nofollow')[] | null;
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PayloadIconField".
+ */
+export type PayloadIconField = ('bluesky' | 'instagram' | 'letterboxd' | 'tiktok' | 'x') | null;
+/**
  * Supported timezones in IANA format.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -73,6 +102,7 @@ export interface Config {
   blocks: {};
   collections: {
     pages: PayloadPagesCollection;
+    articles: PayloadArticlesCollection;
     images: PayloadImagesCollection;
     users: PayloadUsersCollection;
     'payload-locked-documents': PayloadLockedDocument;
@@ -82,6 +112,7 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
+    articles: ArticlesSelect<false> | ArticlesSelect<true>;
     images: ImagesSelect<false> | ImagesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -91,8 +122,14 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    navigation: PayloadNavigationGlobal;
+    footer: PayloadFooterGlobal;
+  };
+  globalsSelect: {
+    navigation: NavigationSelect<false> | NavigationSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
+  };
   locale: null;
   user: PayloadUsersCollection & {
     collection: 'users';
@@ -153,6 +190,46 @@ export interface PayloadPagesCollection {
         id?: string | null;
       }[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles".
+ */
+export interface PayloadArticlesCollection {
+  id: string;
+  title: string;
+  description: string;
+  image?: (string | null) | PayloadImagesCollection;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  slug?: string | null;
+  published?: string | null;
+  type: 'internal' | 'external';
+  url?: string | null;
+  featured?: boolean | null;
+  urlMetadata?: {
+    title?: string | null;
+    description?: string | null;
+    image?: string | null;
+    published?: string | null;
+    site?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -228,6 +305,10 @@ export interface PayloadLockedDocument {
         value: string | PayloadPagesCollection;
       } | null)
     | ({
+        relationTo: 'articles';
+        value: string | PayloadArticlesCollection;
+      } | null)
+    | ({
         relationTo: 'images';
         value: string | PayloadImagesCollection;
       } | null)
@@ -294,6 +375,33 @@ export interface PagesSelect<T extends boolean = true> {
         url?: T;
         label?: T;
         id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "articles_select".
+ */
+export interface ArticlesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  image?: T;
+  content?: T;
+  slug?: T;
+  published?: T;
+  type?: T;
+  url?: T;
+  featured?: T;
+  urlMetadata?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        published?: T;
+        site?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -392,6 +500,108 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation".
+ */
+export interface PayloadNavigationGlobal {
+  id: string;
+  links?: PayloadLinkArrayField;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface PayloadFooterGlobal {
+  id: string;
+  socialLinks?: PayloadLinkArrayField;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation_select".
+ */
+export interface NavigationSelect<T extends boolean = true> {
+  links?: T | PayloadLinkArrayFieldSelect<T>;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PayloadLinkArrayField_select".
+ */
+export interface PayloadLinkArrayFieldSelect<T extends boolean = true> {
+  text?: T;
+  type?: T;
+  relationship?: T;
+  anchor?: T;
+  url?: T;
+  rel?: T;
+  newTab?: T;
+  umamiEvent?: T;
+  umamiEventId?: T;
+  icon?: T;
+  id?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  socialLinks?: T | PayloadLinkArrayFieldSelect<T>;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PayloadFeaturedBlock".
+ */
+export interface PayloadFeaturedBlock {
+  articles?: (string | PayloadArticlesCollection)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'featured';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PayloadArticlesListBlock".
+ */
+export interface PayloadArticlesListBlock {
+  articles?: (string | PayloadArticlesCollection)[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'articlesList';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PayloadSectionBlock".
+ */
+export interface PayloadSectionBlock {
+  title: string;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'section';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

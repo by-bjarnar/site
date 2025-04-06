@@ -33,18 +33,15 @@ export const Images: CollectionConfig<'images'> = {
   typescript: {
     interface: 'PayloadImagesCollection',
   },
-  admin: {
-    useAsTitle: 'filename',
-    defaultColumns: ['filename', 'mimeType', 'updatedAt'],
-  },
   access: {
     read: () => true,
     create: hasRole(Role.Admin, Role.Editor),
     update: hasRole(Role.Admin, Role.Editor),
     delete: hasRole(Role.Admin),
   },
-  hooks: {
-    afterChange: [addDataUrl],
+  admin: {
+    useAsTitle: 'filename',
+    defaultColumns: ['filename', 'mimeType', 'updatedAt'],
   },
   upload: {
     adminThumbnail: 'thumbnail',
@@ -60,6 +57,9 @@ export const Images: CollectionConfig<'images'> = {
         height: 1080,
       },
     ],
+  },
+  hooks: {
+    afterChange: [addDataUrl],
   },
   fields: [
     {

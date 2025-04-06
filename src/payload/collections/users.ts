@@ -7,18 +7,18 @@ export const Users: CollectionConfig<'users'> = {
   typescript: {
     interface: 'PayloadUsersCollection',
   },
-  auth: true,
-  admin: {
-    useAsTitle: 'email',
-    group: 'Admin',
-    defaultColumns: ['email', 'firstName', 'lastName', 'roles'],
-  },
   access: {
     create: hasRole(Role.Admin),
     read: hasRoleOrSelf(Role.Admin),
     update: hasRoleOrSelf(Role.Admin),
     delete: hasRole(Role.Admin),
   },
+  admin: {
+    useAsTitle: 'email',
+    group: 'Admin',
+    defaultColumns: ['email', 'firstName', 'lastName', 'roles'],
+  },
+  auth: true,
   fields: [
     {
       type: 'row',

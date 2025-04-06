@@ -1,0 +1,11 @@
+.field-with-button {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-field);
+  margin-bottom: var(--spacing-field);
+}
+
+.field-with-button button {
+  width: fit-content;
+  margin: 0;
+}

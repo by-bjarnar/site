@@ -29,9 +29,14 @@ import sharp from 'sharp';
 
 import { env } from '@/env/server';
 import { Role } from '@/payload/access';
+import { Articles } from '@/payload/collections/articles';
 import { Images } from '@/payload/collections/images';
 import { Pages } from '@/payload/collections/pages';
 import { Users } from '@/payload/collections/users';
+import { urlMetadataEndpoint } from '@/payload/endpoints/url-metadata';
+import { richTextFields } from '@/payload/fields/link';
+import { Footer } from '@/payload/globals/footer';
+import { Navigation } from '@/payload/globals/navigation';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -39,12 +44,34 @@ const whitelist = [env.SERVER_URL];
 
 export default buildConfig({
   admin: {
+    livePreview: {
+      breakpoints: [
+        {
+          label: 'Mobile',
+          name: 'mobile',
+          width: 375,
+          height: 667,
+        },
+        {
+          label: 'Tablet',
+          name: 'tablet',
+          width: 768,
+          height: 1024,
+        },
+        {
+          label: 'Desktop',
+          name: 'desktop',
+          width: 1440,
+          height: 900,
+        },
+      ],
+    },
     user: Users.slug,
     importMap: {
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Pages, Images, Users],
+  collections: [Pages, Articles, Images, Users],
   cors: whitelist,
   csrf: whitelist,
   db: postgresAdapter({
@@ -69,7 +96,7 @@ export default buildConfig({
       AlignFeature(),
       IndentFeature(),
       HorizontalRuleFeature(),
-      LinkFeature(),
+      LinkFeature({ fields: richTextFields }),
       FixedToolbarFeature(),
       InlineToolbarFeature(),
     ],
@@ -79,6 +106,8 @@ export default buildConfig({
     defaultFromName: env.RESEND_FROM_NAME_DEFAULT,
     apiKey: env.RESEND_API_KEY,
   }),
+  endpoints: [urlMetadataEndpoint],
+  globals: [Navigation, Footer],
   graphQL: {
     disable: true,
   },
@@ -121,7 +150,6 @@ export default buildConfig({
         },
         region: 'auto',
       },
-      clientUploads: true,
     }),
   ],
   secret: env.PAYLOAD_SECRET,

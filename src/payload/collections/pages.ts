@@ -1,5 +1,5 @@
-import { lexicalEditor } from '@payloadcms/richtext-lexical';
-import { revalidatePath } from 'next/cache';
+import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import type {
   CollectionAfterChangeHook,
   CollectionAfterDeleteHook,
@@ -9,7 +9,11 @@ import type {
 
 import { slugify } from '@/lib/utils/slugify';
 import { Role, hasRole, hasRoleOrPublished } from '@/payload/access';
+import { ArticlesList } from '@/payload/blocks/articles-list';
+import { Featured } from '@/payload/blocks/featured';
+import { Section } from '@/payload/blocks/section';
 import type { PayloadPagesCollection } from '@/payload/payload-types';
+import { generatePreviewPath } from '@/payload/utils/generate-preview-path';
 
 const setSlug: FieldHook<
   PayloadPagesCollection,
@@ -60,6 +64,7 @@ const revalidatePageAfterChange: CollectionAfterChangeHook<PayloadPagesCollectio
     }
 
     revalidatePath(doc.path);
+    revalidateTag('pages-sitemap');
   }
 
   if (previousDoc?._status === 'published' && doc._status !== 'published' && previousDoc.path) {
@@ -70,6 +75,7 @@ const revalidatePageAfterChange: CollectionAfterChangeHook<PayloadPagesCollectio
     }
 
     revalidatePath(previousDoc.path);
+    revalidateTag('pages-sitemap');
   }
 
   return doc;
@@ -87,6 +93,7 @@ export const revalidatePageAfterDelete: CollectionAfterDeleteHook<PayloadPagesCo
     }
 
     revalidatePath(doc.path);
+    revalidateTag('pages-sitemap');
   }
 
   return doc;
@@ -97,27 +104,42 @@ export const Pages: CollectionConfig<'pages'> = {
   typescript: {
     interface: 'PayloadPagesCollection',
   },
-  versions: {
-    drafts: true,
-  },
-  admin: {
-    useAsTitle: 'title',
-    defaultColumns: ['title', 'path', '_status', 'updatedAt'],
-  },
   access: {
     read: hasRoleOrPublished(Role.Admin, Role.Editor),
     create: hasRole(Role.Admin, Role.Editor),
     update: hasRole(Role.Admin, Role.Editor),
     delete: hasRole(Role.Admin),
   },
-  hooks: {
-    afterChange: [setPath, revalidatePageAfterChange],
-    afterDelete: [revalidatePageAfterDelete],
+  admin: {
+    useAsTitle: 'title',
+    defaultColumns: ['title', 'path', '_status', 'updatedAt'],
+    livePreview: {
+      url: ({ data, req }) =>
+        generatePreviewPath({
+          path: typeof data?.path === 'string' ? data.path : '',
+          collection: 'pages',
+          req,
+        }),
+    },
+    preview: (data, { req }) =>
+      generatePreviewPath({
+        path: typeof data?.path === 'string' ? data.path : '',
+        collection: 'pages',
+        req,
+      }),
   },
   defaultPopulate: {
     slug: true,
     path: true,
     breadcrumbs: true,
+  },
+  defaultSort: '-updatedAt',
+  versions: {
+    drafts: true,
+  },
+  hooks: {
+    afterChange: [setPath, revalidatePageAfterChange],
+    afterDelete: [revalidatePageAfterDelete],
   },
   fields: [
     {
@@ -135,7 +157,10 @@ export const Pages: CollectionConfig<'pages'> = {
       name: 'content',
       type: 'richText',
       editor: lexicalEditor({
-        features: ({ rootFeatures }) => rootFeatures,
+        features: ({ rootFeatures }) => [
+          ...rootFeatures,
+          BlocksFeature({ blocks: [Featured, ArticlesList, Section] }),
+        ],
       }),
     },
     {

@@ -11,6 +11,8 @@ import { importMap } from './admin/importMap.js';
 
 import '@payloadcms/next/css';
 
+import './custom.css';
+
 type Args = {
   children: React.ReactNode;
 };
