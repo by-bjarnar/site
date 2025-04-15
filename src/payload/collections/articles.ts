@@ -122,7 +122,7 @@ export const Articles: CollectionConfig<'articles'> = {
       defaultValue: false,
       admin: {
         position: 'sidebar',
-        readOnly: true,
+        // readOnly: true, // TODO: uncomment when nested field hooks bug is fixed
       },
     },
     {
