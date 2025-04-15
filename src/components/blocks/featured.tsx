@@ -1,9 +1,9 @@
 import Link from 'next/link';
 
 import { PayloadImage } from '@/components/ui/payload-image';
-import { articleDate, articleLinkProps } from '@/lib/utils/article';
-import { formatDate } from '@/lib/utils/format';
 import type { PayloadFeaturedBlock } from '@/payload/payload-types';
+import { articleDate, articleLinkProps } from '@/utils/article';
+import { formatDate } from '@/utils/format';
 
 export function FeaturedBlock({ articles }: PayloadFeaturedBlock) {
   const featured = articles?.filter((article) => typeof article !== 'string');
