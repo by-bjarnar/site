@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react';
 
-import { cn } from '@/lib/utils/cn';
-import { slugify } from '@/lib/utils/slugify';
+import { cn } from '@/utils/cn';
+import { slugify } from '@/utils/slugify';
 
 type Props = ComponentProps<'section'> & {
   title: string;

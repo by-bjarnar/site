@@ -1,9 +1,9 @@
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import { type CollectionConfig, type FieldHook } from 'payload';
 
-import { slugify } from '@/lib/utils/slugify';
 import { Role, hasRole, hasRoleOrPublished } from '@/payload/access';
 import type { PayloadArticlesCollection } from '@/payload/payload-types';
+import { slugify } from '@/utils/slugify';
 
 const setSlug: FieldHook<
   PayloadArticlesCollection,
@@ -122,7 +122,7 @@ export const Articles: CollectionConfig<'articles'> = {
       defaultValue: false,
       admin: {
         position: 'sidebar',
-        readOnly: true,
+        // readOnly: true, // TODO: uncomment when nested field hooks bug is fixed
       },
     },
     {

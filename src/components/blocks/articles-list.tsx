@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-import { articleDate, articleLinkProps } from '@/lib/utils/article';
-import { formatDate } from '@/lib/utils/format';
 import type { PayloadArticlesListBlock } from '@/payload/payload-types';
+import { articleDate, articleLinkProps } from '@/utils/article';
+import { formatDate } from '@/utils/format';
 
 export function ArticlesListBlock({ articles }: PayloadArticlesListBlock) {
   const filteredArticles = articles?.filter((article) => typeof article !== 'string');

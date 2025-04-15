@@ -8,10 +8,10 @@ import { getPayload } from 'payload';
 
 import { Footer } from '@/components/footer';
 import { env } from '@/env/client';
-import { cn } from '@/lib/utils/cn';
-import { linkProps } from '@/lib/utils/link';
 import type { PayloadFooterGlobal, PayloadNavigationGlobal } from '@/payload/payload-types';
 import payloadConfig from '@/payload/payload.config';
+import { cn } from '@/utils/cn';
+import { linkProps } from '@/utils/link';
 
 import './globals.css';
 

@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-import { Icons } from '@/lib/components/icons';
-import { linkProps } from '@/lib/utils/link';
+import { Icons } from '@/icons';
 import type { PayloadFooterGlobal } from '@/payload/payload-types';
+import { linkProps } from '@/utils/link';
 
 export function Footer({ socialLinks }: PayloadFooterGlobal) {
   return (

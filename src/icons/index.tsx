@@ -1,10 +1,10 @@
 import type { ComponentProps, JSX } from 'react';
 
-import { IconBluesly } from '@/lib/components/icons/bluesky';
-import { IconInstagram } from '@/lib/components/icons/instagram';
-import { IconLetterboxd } from '@/lib/components/icons/letterboxd';
-import { IconTikTok } from '@/lib/components/icons/tiktok';
-import { IconX } from '@/lib/components/icons/x';
+import { IconBluesly } from '@/icons/bluesky';
+import { IconInstagram } from '@/icons/instagram';
+import { IconLetterboxd } from '@/icons/letterboxd';
+import { IconTikTok } from '@/icons/tiktok';
+import { IconX } from '@/icons/x';
 import type { PayloadIconField } from '@/payload/payload-types';
 
 type IconFunction = (props: ComponentProps<'svg'>) => JSX.Element;

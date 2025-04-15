@@ -1,22 +1,4 @@
-import type { Block, FieldHook } from 'payload';
-
-const fetchNonFeaturedArticles: FieldHook = async (args) => {
-  const {
-    req,
-    req: { payload },
-    operation,
-  } = args;
-
-  if (operation === 'read') {
-    const response = await payload.find({
-      collection: 'articles',
-      where: { featured: { not_equals: true } },
-      user: req.user,
-    });
-
-    return response?.docs?.length ? response.docs : [];
-  }
-};
+import type { Block } from 'payload';
 
 export const ArticlesList: Block = {
   slug: 'articlesList',
@@ -32,7 +14,18 @@ export const ArticlesList: Block = {
         readOnly: true,
       },
       hooks: {
-        afterRead: [fetchNonFeaturedArticles],
+        afterRead: [
+          async ({ req, req: { payload } }) => {
+            const response = await payload.find({
+              collection: 'articles',
+              where: { featured: { not_equals: true } },
+              user: req.user,
+              req,
+            });
+
+            return response?.docs?.length ? response.docs : [];
+          },
+        ],
       },
     },
   ],

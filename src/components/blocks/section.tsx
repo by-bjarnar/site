@@ -1,6 +1,6 @@
 import { RichText } from '@/components/rich-text';
-import { slugify } from '@/lib/utils/slugify';
 import type { PayloadSectionBlock } from '@/payload/payload-types';
+import { slugify } from '@/utils/slugify';
 
 export function SectionBlock({ title, content }: PayloadSectionBlock) {
   return (

@@ -1,27 +1,4 @@
-import type { Block, FieldHook } from 'payload';
-
-import type { PayloadFeaturedBlock } from '@/payload/payload-types';
-
-const setFeaturedArticles: FieldHook<any, any, PayloadFeaturedBlock> = async (args) => {
-  const {
-    req: { payload },
-    operation,
-    siblingData,
-  } = args;
-
-  if (operation === 'create' || operation === 'update') {
-    await payload.update({
-      collection: 'articles',
-      where: { featured: { equals: true } },
-      data: { featured: false },
-    });
-    await payload.update({
-      collection: 'articles',
-      where: { id: { in: siblingData?.articles } },
-      data: { featured: true },
-    });
-  }
-};
+import type { Block } from 'payload';
 
 export const Featured: Block = {
   slug: 'featured',
@@ -33,7 +10,22 @@ export const Featured: Block = {
       relationTo: 'articles',
       hasMany: true,
       hooks: {
-        beforeChange: [setFeaturedArticles],
+        afterChange: [
+          async ({ value, req, req: { payload } }) => {
+            await payload.update({
+              collection: 'articles',
+              where: { featured: { equals: true } },
+              data: { featured: false },
+              req,
+            });
+            await payload.update({
+              collection: 'articles',
+              where: { id: { in: value } },
+              data: { featured: true },
+              req,
+            });
+          },
+        ],
       },
     },
   ],

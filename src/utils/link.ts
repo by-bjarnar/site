@@ -1,5 +1,5 @@
-import { slugify } from '@/lib/utils/slugify';
 import type { PayloadLinkArrayField } from '@/payload/payload-types';
+import { slugify } from '@/utils/slugify';
 
 export type PayloadLinkField = NonNullable<PayloadLinkArrayField>[number];
 
