@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { PayloadImage } from '@/lib/components/payload-image';
+import { PayloadImage } from '@/components/ui/payload-image';
 import { articleDate, articleLinkProps } from '@/lib/utils/article';
 import { formatDate } from '@/lib/utils/format';
 import type { PayloadFeaturedBlock } from '@/payload/payload-types';
