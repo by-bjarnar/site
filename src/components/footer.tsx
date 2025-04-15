@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Icons } from '@/lib/components/icons';
+import { Icons } from '@/icons';
 import { linkProps } from '@/lib/utils/link';
 import type { PayloadFooterGlobal } from '@/payload/payload-types';
 
