@@ -222,7 +222,6 @@ export interface PayloadArticlesCollection {
   published?: string | null;
   type: 'internal' | 'external';
   url?: string | null;
-  featured?: boolean | null;
   urlMetadata?: {
     title?: string | null;
     description?: string | null;
@@ -393,7 +392,6 @@ export interface ArticlesSelect<T extends boolean = true> {
   published?: T;
   type?: T;
   url?: T;
-  featured?: T;
   urlMetadata?:
     | T
     | {

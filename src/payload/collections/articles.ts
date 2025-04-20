@@ -116,15 +116,6 @@ export const Articles: CollectionConfig<'articles'> = {
       },
     },
     {
-      name: 'featured',
-      type: 'checkbox',
-      defaultValue: false,
-      admin: {
-        position: 'sidebar',
-        // readOnly: true, // TODO: uncomment when nested field hooks bug is fixed
-      },
-    },
-    {
       name: 'urlMetadata',
       label: 'URL Metadata',
       type: 'group',
