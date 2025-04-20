@@ -78,7 +78,6 @@ export const Articles: CollectionConfig<'articles'> = {
       type: 'date',
       admin: {
         position: 'sidebar',
-        readOnly: true,
       },
     },
     {

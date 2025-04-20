@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { PayloadImage } from '@/components/ui/payload-image';
 import type { PayloadFeaturedBlock } from '@/payload/payload-types';
-import { articleDate, articleLinkProps } from '@/utils/article';
+import { articleLinkProps } from '@/utils/article';
 import { formatDate } from '@/utils/format';
 
 export function FeaturedBlock({ articles }: PayloadFeaturedBlock) {
@@ -17,9 +17,7 @@ export function FeaturedBlock({ articles }: PayloadFeaturedBlock) {
         >
           <div className="mb-2 flex items-baseline justify-between gap-2 border-t-2 border-dotted border-gold-6 pt-2 font-sans text-sm font-medium">
             <p>{article.urlMetadata?.site}</p>
-            <time dateTime={articleDate(article) || undefined}>
-              {formatDate(articleDate(article))}
-            </time>
+            <time dateTime={article.published || undefined}>{formatDate(article.published)}</time>
           </div>
           {article.image && typeof article.image !== 'string' ? (
             <PayloadImage

@@ -1,9 +1,5 @@
 import type { PayloadArticlesCollection } from '@/payload/payload-types';
 
-export function articleDate(article: PayloadArticlesCollection) {
-  return article.type === 'internal' ? article.createdAt : article.urlMetadata?.published;
-}
-
 export function articleLinkProps(article: PayloadArticlesCollection) {
   const internal = article.type === 'internal';
   const href = internal ? `/articles/${article.slug}` : article.url;

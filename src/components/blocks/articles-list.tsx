@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import type { PayloadArticlesListBlock } from '@/payload/payload-types';
-import { articleDate, articleLinkProps } from '@/utils/article';
+import { articleLinkProps } from '@/utils/article';
 import { formatDate } from '@/utils/format';
 
 export function ArticlesListBlock({ articles }: PayloadArticlesListBlock) {
@@ -20,10 +20,10 @@ export function ArticlesListBlock({ articles }: PayloadArticlesListBlock) {
               {article.urlMetadata?.site}
             </span>
             <time
-              dateTime={articleDate(article) || undefined}
+              dateTime={article.published || undefined}
               className="z-10 hidden text-right whitespace-nowrap text-gold-10 group-hover:text-gold-11 md:col-span-2 md:block"
             >
-              {formatDate(articleDate(article))}
+              {formatDate(article.published)}
             </time>
             <span className="z-10 flex flex-row gap-2 text-sm md:hidden">
               <span className="z-10 text-gold-10 group-hover:text-gold-11 md:col-span-2">
@@ -31,10 +31,10 @@ export function ArticlesListBlock({ articles }: PayloadArticlesListBlock) {
               </span>
               •
               <time
-                dateTime={articleDate(article) || undefined}
+                dateTime={article.published || undefined}
                 className="z-10 text-right whitespace-nowrap text-gold-10 group-hover:text-gold-11 md:col-span-2"
               >
-                {formatDate(articleDate(article))}
+                {formatDate(article.published)}
               </time>
             </span>
             <span className="absolute -inset-x-4 -inset-y-3 rounded-sm group-hover:bg-gold-3" />
