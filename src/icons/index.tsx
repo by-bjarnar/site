@@ -1,6 +1,7 @@
 import type { ComponentProps, JSX } from 'react';
 
 import { IconBluesly } from '@/icons/bluesky';
+import { IconFiverr } from '@/icons/fiverr';
 import { IconInstagram } from '@/icons/instagram';
 import { IconLetterboxd } from '@/icons/letterboxd';
 import { IconTikTok } from '@/icons/tiktok';
@@ -11,6 +12,7 @@ type IconFunction = (props: ComponentProps<'svg'>) => JSX.Element;
 
 const icons: Record<NonNullable<PayloadIconField>, IconFunction> = {
   bluesky: IconBluesly,
+  fiverr: IconFiverr,
   instagram: IconInstagram,
   letterboxd: IconLetterboxd,
   tiktok: IconTikTok,

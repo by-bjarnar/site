@@ -13,6 +13,10 @@ export const iconField: Field = {
       value: 'bluesky',
     },
     {
+      label: 'Fiverr',
+      value: 'fiverr',
+    },
+    {
       label: 'Instagram',
       value: 'instagram',
     },

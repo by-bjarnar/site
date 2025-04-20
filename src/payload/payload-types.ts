@@ -39,7 +39,7 @@ export type PayloadRelField = ('noopener' | 'noreferrer' | 'nofollow')[] | null;
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "PayloadIconField".
  */
-export type PayloadIconField = ('bluesky' | 'instagram' | 'letterboxd' | 'tiktok' | 'x') | null;
+export type PayloadIconField = ('bluesky' | 'fiverr' | 'instagram' | 'letterboxd' | 'tiktok' | 'x') | null;
 /**
  * Supported timezones in IANA format.
  *
