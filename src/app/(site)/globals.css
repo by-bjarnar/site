@@ -124,14 +124,10 @@
   h4,
   h5,
   h6 {
-    @apply font-serif text-balance text-green-11;
+    @apply font-serif text-green-11;
   }
 
   a {
-    @apply border-b-2 border-dotted border-b-transparent text-green-11 transition-all hover:border-b-green-11 hover:text-green-11;
-  }
-
-  p {
-    @apply text-pretty;
+    @apply border-b-2 border-dotted border-b-transparent text-green-11 transition-all hover:border-b-green-12 hover:text-green-12;
   }
 }

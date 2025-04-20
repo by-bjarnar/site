@@ -10,7 +10,7 @@ export function FeaturedBlock({ articles }: PayloadFeaturedBlock) {
 
   return (
     <ul className="grid w-full grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-6">
-      {featured?.map((article) => (
+      {featured?.map((article, i) => (
         <li
           key={article.id}
           className="col-span-2 md:first:col-span-4 lg:col-span-2 lg:first:col-span-3 lg:nth-2:col-span-3"
@@ -22,7 +22,11 @@ export function FeaturedBlock({ articles }: PayloadFeaturedBlock) {
             </time>
           </div>
           {article.image && typeof article.image !== 'string' ? (
-            <PayloadImage {...article.image} className="mb-4 h-64 w-full object-cover" />
+            <PayloadImage
+              {...article.image}
+              data-index={i}
+              className="mb-4 h-52 w-full object-cover md:h-64 data-[index=1]:md:h-52 data-[index=2]:md:h-52 data-[index=3]:md:h-52 data-[index=4]:md:h-52 data-[index=1]:lg:h-64"
+            />
           ) : null}
           <h2 className="mb-2 text-2xl">
             <Link {...articleLinkProps(article)}>{article.title}</Link>
