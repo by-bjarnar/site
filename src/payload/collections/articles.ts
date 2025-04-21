@@ -28,7 +28,7 @@ export const Articles: CollectionConfig<'articles'> = {
   },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', '_status', 'featured', 'published', 'updatedAt'],
+    defaultColumns: ['title', '_status', 'published', 'updatedAt'],
   },
   defaultSort: '-published',
   versions: {

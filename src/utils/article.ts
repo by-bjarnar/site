@@ -7,7 +7,7 @@ export function articleLinkProps(article: PayloadArticlesCollection) {
   return {
     href: href || '/',
     target: internal ? undefined : '_blank',
-    rel: internal ? undefined : 'nofollow,noopener,noreferrer',
+    rel: internal ? undefined : 'noopener',
     'aria-label': article.title,
     'data-umami-event': 'Featured article',
     'data-umami-event-id': article.slug,

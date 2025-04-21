@@ -15,9 +15,7 @@ import type {
   SerializedLexicalNodeWithParent,
 } from '@payloadcms/richtext-lexical/react';
 
-import { ArticlesListBlock } from '@/components/blocks/articles-list';
 import { FeaturedBlock } from '@/components/blocks/featured';
-import { SectionBlock } from '@/components/blocks/section';
 import { blockQuoteConverter } from '@/components/rich-text/block-quote-converter';
 import { headingConverter } from '@/components/rich-text/heading-converter';
 import { horizontalRuleConverter } from '@/components/rich-text/horizontal-rule-converter';
@@ -26,11 +24,7 @@ import { listConverter } from '@/components/rich-text/list-converter';
 import { listitemConverter } from '@/components/rich-text/listitem-converter';
 import { paragraphConverter } from '@/components/rich-text/paragraph-converter';
 import { textConverter } from '@/components/rich-text/text-converter';
-import type {
-  PayloadArticlesListBlock,
-  PayloadFeaturedBlock,
-  PayloadSectionBlock,
-} from '@/payload/payload-types';
+import type { PayloadFeaturedBlock } from '@/payload/payload-types';
 import { cn } from '@/utils/cn';
 
 export type JSXConverter<
@@ -56,7 +50,7 @@ export type JSXConverter<
 
 type NodeType =
   | DefaultNodeTypes
-  | SerializedBlockNode<PayloadArticlesListBlock | PayloadFeaturedBlock | PayloadSectionBlock>
+  | SerializedBlockNode<PayloadFeaturedBlock>
   | SerializedInlineBlockNode;
 
 type Classes = {
@@ -105,9 +99,7 @@ const jsxConverters: JSXConvertersFunction<NodeType> = () => ({
   listitem: listitemConverter,
   link: linkConverter,
   blocks: {
-    articlesList: ({ node }) => <ArticlesListBlock {...node.fields} />,
     featured: ({ node }) => <FeaturedBlock {...node.fields} />,
-    section: ({ node }) => <SectionBlock {...node.fields} />,
   },
 });
 
