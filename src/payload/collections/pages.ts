@@ -8,6 +8,7 @@ import type {
 } from 'payload';
 
 import { Role, hasRole, hasRoleOrPublished } from '@/payload/access';
+import { ButtonLink } from '@/payload/blocks/button-link';
 import { Featured } from '@/payload/blocks/featured';
 import type { PayloadPagesCollection } from '@/payload/payload-types';
 import { generatePreviewPath } from '@/payload/utils/generate-preview-path';
@@ -155,7 +156,10 @@ export const Pages: CollectionConfig<'pages'> = {
       name: 'content',
       type: 'richText',
       editor: lexicalEditor({
-        features: ({ rootFeatures }) => [...rootFeatures, BlocksFeature({ blocks: [Featured] })],
+        features: ({ rootFeatures }) => [
+          ...rootFeatures,
+          BlocksFeature({ blocks: [Featured, ButtonLink] }),
+        ],
       }),
     },
     {

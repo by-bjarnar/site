@@ -15,6 +15,7 @@ import type {
   SerializedLexicalNodeWithParent,
 } from '@payloadcms/richtext-lexical/react';
 
+import { ButtonLinkBlock } from '@/components/blocks/button-link';
 import { FeaturedBlock } from '@/components/blocks/featured';
 import { blockQuoteConverter } from '@/components/rich-text/block-quote-converter';
 import { headingConverter } from '@/components/rich-text/heading-converter';
@@ -24,7 +25,7 @@ import { listConverter } from '@/components/rich-text/list-converter';
 import { listitemConverter } from '@/components/rich-text/listitem-converter';
 import { paragraphConverter } from '@/components/rich-text/paragraph-converter';
 import { textConverter } from '@/components/rich-text/text-converter';
-import type { PayloadFeaturedBlock } from '@/payload/payload-types';
+import type { PayloadButtonLinkBlock, PayloadFeaturedBlock } from '@/payload/payload-types';
 import { cn } from '@/utils/cn';
 
 export type JSXConverter<
@@ -50,7 +51,7 @@ export type JSXConverter<
 
 type NodeType =
   | DefaultNodeTypes
-  | SerializedBlockNode<PayloadFeaturedBlock>
+  | SerializedBlockNode<PayloadFeaturedBlock | PayloadButtonLinkBlock>
   | SerializedInlineBlockNode;
 
 type Classes = {
@@ -99,6 +100,7 @@ const jsxConverters: JSXConvertersFunction<NodeType> = () => ({
   listitem: listitemConverter,
   link: linkConverter,
   blocks: {
+    'button-link': ({ node }) => <ButtonLinkBlock {...node.fields} />,
     featured: ({ node }) => <FeaturedBlock {...node.fields} />,
   },
 });

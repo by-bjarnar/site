@@ -9,6 +9,10 @@ export const iconField: Field = {
   },
   options: [
     {
+      label: 'Arrow Right',
+      value: 'arrowRight',
+    },
+    {
       label: 'Bluesky',
       value: 'bluesky',
     },

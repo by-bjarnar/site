@@ -39,7 +39,9 @@ export type PayloadRelField = ('noopener' | 'noreferrer' | 'nofollow')[] | null;
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "PayloadIconField".
  */
-export type PayloadIconField = ('bluesky' | 'fiverr' | 'instagram' | 'letterboxd' | 'tiktok' | 'x') | null;
+export type PayloadIconField =
+  | ('arrowRight' | 'bluesky' | 'fiverr' | 'instagram' | 'letterboxd' | 'tiktok' | 'x')
+  | null;
 /**
  * Supported timezones in IANA format.
  *
@@ -94,6 +96,21 @@ export type SupportedTimezones =
   | 'Pacific/Noumea'
   | 'Pacific/Auckland'
   | 'Pacific/Fiji';
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PayloadButtonVariantField".
+ */
+export type PayloadButtonVariantField = 'primary' | 'secondary' | 'tertiary';
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PayloadButtonSizeField".
+ */
+export type PayloadButtonSizeField = 'sm' | 'md' | 'lg';
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PayloadButtonIconPositionField".
+ */
+export type PayloadButtonIconPositionField = ('left' | 'right' | 'center') | null;
 
 export interface Config {
   auth: {
@@ -561,10 +578,41 @@ export interface FooterSelect<T extends boolean = true> {
  * via the `definition` "PayloadFeaturedBlock".
  */
 export interface PayloadFeaturedBlock {
-  articles?: (string | PayloadArticlesCollection)[] | null;
+  articles: (string | PayloadArticlesCollection)[];
   id?: string | null;
   blockName?: string | null;
   blockType: 'featured';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PayloadLinkGroupField".
+ */
+export interface PayloadLinkGroupField {
+  text: string;
+  type: 'internal' | 'external';
+  relationship?: (string | null) | PayloadPagesCollection;
+  anchor?: string | null;
+  url?: string | null;
+  rel?: PayloadRelField;
+  newTab?: boolean | null;
+  umamiEvent?: string | null;
+  umamiEventId?: string | null;
+  id?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PayloadButtonLinkBlock".
+ */
+export interface PayloadButtonLinkBlock {
+  alignment: 'left' | 'center' | 'right';
+  variant: PayloadButtonVariantField;
+  size: PayloadButtonSizeField;
+  icon?: PayloadIconField;
+  iconPosition?: PayloadButtonIconPositionField;
+  link: PayloadLinkGroupField;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'button-link';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

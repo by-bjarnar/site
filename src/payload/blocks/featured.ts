@@ -9,6 +9,9 @@ export const Featured: Block = {
       type: 'relationship',
       relationTo: 'articles',
       hasMany: true,
+      required: true,
+      minRows: 5,
+      maxRows: 5,
     },
   ],
 };
