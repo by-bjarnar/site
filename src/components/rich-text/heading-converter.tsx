@@ -7,13 +7,13 @@ import { slugify } from '@/utils/slugify';
 const headingClasses = (node: SerializedHeadingNode) => {
   switch (node.tag) {
     case 'h1':
-      return 'mt-8 mb-6 text-4xl xs:text-5xl';
+      return 'mt-10 mb-6 text-4xl xs:text-5xl';
     case 'h2':
-      return 'mt-6 mb-4 text-3xl xs:text-4xl';
+      return 'mt-8 mb-4 text-3xl xs:text-4xl';
     case 'h3':
-      return 'mt-4 mb-2 text-2xl xs:text-3xl';
+      return 'mt-6 mb-2 text-2xl xs:text-3xl';
     default:
-      return 'mt-2 mb-1 text-xl xs:text-2xl';
+      return 'mt-4 mb-1 text-xl xs:text-2xl';
   }
 };
 

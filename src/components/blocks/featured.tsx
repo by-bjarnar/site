@@ -23,12 +23,12 @@ export function FeaturedBlock({ articles }: PayloadFeaturedBlock) {
             <PayloadImage
               {...article.image}
               data-index={i}
-              className="mb-4 h-52 w-full object-cover md:h-64 data-[index=1]:md:h-52 data-[index=2]:md:h-52 data-[index=3]:md:h-52 data-[index=4]:md:h-52 data-[index=1]:lg:h-64"
+              className="mb-4 h-48 w-full object-cover md:h-64 data-[index=1]:md:h-48 data-[index=2]:md:h-48 data-[index=3]:md:h-48 data-[index=4]:md:h-48 data-[index=1]:lg:h-64"
             />
           ) : null}
-          <h2 className="mb-2 text-2xl">
-            <Link {...articleLinkProps(article)}>{article.title}</Link>
-          </h2>
+          <Link {...articleLinkProps(article)} className="mb-2 block text-2xl underline-offset-8">
+            <h2 className="text-inherit">{article.title}</h2>
+          </Link>
           <p>{article.description}</p>
         </li>
       ))}

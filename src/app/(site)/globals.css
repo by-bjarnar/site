@@ -128,6 +128,6 @@
   }
 
   a {
-    @apply border-b-2 border-dotted border-b-transparent text-green-11 transition-all hover:border-b-green-12 hover:text-green-12;
+    @apply text-green-11 decoration-dotted underline-offset-4 hover:text-green-12 hover:underline;
   }
 }
