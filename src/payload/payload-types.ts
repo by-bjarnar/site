@@ -585,6 +585,17 @@ export interface PayloadFeaturedBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PayloadImageBlock".
+ */
+export interface PayloadImageBlock {
+  image: string | PayloadImagesCollection;
+  position: 'center' | 'left' | 'right';
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'image';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "PayloadLinkGroupField".
  */
 export interface PayloadLinkGroupField {

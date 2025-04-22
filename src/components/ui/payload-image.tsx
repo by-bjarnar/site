@@ -45,7 +45,7 @@ export function PayloadImage({
       placeholder="blur"
       blurDataURL={dataUrl ?? undefined}
       alt={alt}
-      className={cn('rounded-sm', className)}
+      className={cn('rounded-sm border border-gold-6', className)}
       {...props}
     />
   );

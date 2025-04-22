@@ -21,6 +21,7 @@ import {
   SuperscriptFeature,
   UnderlineFeature,
   UnorderedListFeature,
+  UploadFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical';
 import { s3Storage } from '@payloadcms/storage-s3';
@@ -97,6 +98,7 @@ export default buildConfig({
       IndentFeature(),
       HorizontalRuleFeature(),
       LinkFeature({ fields: richTextFields }),
+      UploadFeature({ [Images.slug]: Images.fields }),
       FixedToolbarFeature(),
       InlineToolbarFeature(),
     ],
