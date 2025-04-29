@@ -94,7 +94,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
               </ul>
             </div>
           </aside>
-          <main>{children}</main>
+          <main className="w-full">{children}</main>
         </div>
         <Footer {...footer} />
         <Script

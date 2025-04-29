@@ -5,6 +5,7 @@ import { cva } from 'class-variance-authority';
 
 import { IconArrowRight } from '@/icons/arrow-right';
 import { IconBluesly } from '@/icons/bluesky';
+import { IconClose } from '@/icons/close';
 import { IconFiverr } from '@/icons/fiverr';
 import { IconInstagram } from '@/icons/instagram';
 import { IconLetterboxd } from '@/icons/letterboxd';
@@ -18,6 +19,7 @@ type IconFunction = (props: ComponentProps<'svg'>) => JSX.Element;
 const icons: Record<NonNullable<PayloadIconField>, IconFunction> = {
   arrowRight: IconArrowRight,
   bluesky: IconBluesly,
+  close: IconClose,
   fiverr: IconFiverr,
   instagram: IconInstagram,
   letterboxd: IconLetterboxd,
@@ -44,6 +46,10 @@ interface Props extends Omit<ComponentProps<'svg'>, 'children'>, VariantProps<ty
 
 export function Icons({ className, name, size, ...props }: Props) {
   const Icon = icons[name];
+
+  if (!Icon) {
+    return null;
+  }
 
   return <Icon {...props} className={cn(iconVariants({ size }), className)} />;
 }

@@ -10,6 +10,7 @@ import type {
 import { Role, hasRole, hasRoleOrPublished } from '@/payload/access';
 import { ButtonLink } from '@/payload/blocks/button-link';
 import { Featured } from '@/payload/blocks/featured';
+import { Form } from '@/payload/blocks/form';
 import { Image } from '@/payload/blocks/image-block';
 import type { PayloadPagesCollection } from '@/payload/payload-types';
 import { generatePreviewPath } from '@/payload/utils/generate-preview-path';
@@ -159,7 +160,7 @@ export const Pages: CollectionConfig<'pages'> = {
       editor: lexicalEditor({
         features: ({ rootFeatures }) => [
           ...rootFeatures,
-          BlocksFeature({ blocks: [Featured, Image, ButtonLink] }),
+          BlocksFeature({ blocks: [ButtonLink, Featured, Form, Image] }),
         ],
       }),
     },

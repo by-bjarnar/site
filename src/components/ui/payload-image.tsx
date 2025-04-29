@@ -39,6 +39,7 @@ export function PayloadImage({
 
   return (
     <Image
+      {...props}
       src={src}
       width={width}
       height={height}
@@ -46,7 +47,6 @@ export function PayloadImage({
       blurDataURL={dataUrl ?? undefined}
       alt={alt}
       className={cn('rounded-sm border border-gold-6', className)}
-      {...props}
     />
   );
 }

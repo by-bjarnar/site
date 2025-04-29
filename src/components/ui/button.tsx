@@ -7,14 +7,15 @@ import { type VariantProps, cva } from 'class-variance-authority';
 import { cn } from '@/utils/cn';
 
 const buttonVariants = cva(
-  'inline-flex shrink-0 items-center justify-center rounded-sm font-medium no-underline transition',
+  'inline-flex shrink-0 items-center justify-center rounded-sm font-medium no-underline transition disabled:cursor-not-allowed disabled:bg-gold-3 disabled:text-gold-8',
   {
     variants: {
       variant: {
-        primary: 'bg-green-11 text-green-1 hover:bg-green-12 hover:text-green-2',
+        primary:
+          'not-disabled:bg-green-11 not-disabled:text-green-1 not-disabled:hover:bg-green-12 not-disabled:hover:text-green-2',
         secondary:
-          'border border-gold-6 bg-gold-3 text-gold-11 hover:border-gold-8 hover:bg-gold-4 hover:text-gold-12',
-        tertiary: 'hover:bg-gold-4 hover:text-gold-12',
+          'not-disabled:border not-disabled:border-gold-6 not-disabled:bg-gold-3 not-disabled:text-gold-11 not-disabled:hover:border-gold-8 not-disabled:hover:bg-gold-4 not-disabled:hover:text-gold-12',
+        tertiary: 'not-disabled:hover:bg-gold-4 not-disabled:hover:text-gold-12',
       },
       size: {
         sm: 'h-8 gap-1 text-xs',

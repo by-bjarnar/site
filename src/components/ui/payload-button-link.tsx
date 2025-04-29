@@ -19,9 +19,9 @@ export function PayloadButtonLink({
 }: PayloadButtonLinkProps) {
   return (
     <Button
+      {...props}
       iconPosition={iconPosition}
       size={size}
-      {...props}
       render={
         <Link {...linkProps(link)}>
           {iconPosition !== 'center' ? link.text : null}

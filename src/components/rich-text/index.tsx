@@ -17,6 +17,7 @@ import type {
 
 import { ButtonLinkBlock } from '@/components/blocks/button-link';
 import { FeaturedBlock } from '@/components/blocks/featured';
+import { FormBlock } from '@/components/blocks/form';
 import { ImageBlock } from '@/components/blocks/image';
 import { blockQuoteConverter } from '@/components/rich-text/block-quote-converter';
 import { headingConverter } from '@/components/rich-text/heading-converter';
@@ -30,6 +31,7 @@ import { uploadConverter } from '@/components/rich-text/upload-converter';
 import type {
   PayloadButtonLinkBlock,
   PayloadFeaturedBlock,
+  PayloadFormBlock,
   PayloadImageBlock,
 } from '@/payload/payload-types';
 import { cn } from '@/utils/cn';
@@ -57,7 +59,9 @@ export type JSXConverter<
 
 type NodeType =
   | DefaultNodeTypes
-  | SerializedBlockNode<PayloadFeaturedBlock | PayloadButtonLinkBlock | PayloadImageBlock>
+  | SerializedBlockNode<
+      PayloadFeaturedBlock | PayloadFormBlock | PayloadButtonLinkBlock | PayloadImageBlock
+    >
   | SerializedInlineBlockNode;
 
 type Classes = {
@@ -109,6 +113,7 @@ const jsxConverters: JSXConvertersFunction<NodeType> = () => ({
   blocks: {
     'button-link': ({ node }) => <ButtonLinkBlock {...node.fields} />,
     featured: ({ node }) => <FeaturedBlock {...node.fields} />,
+    form: ({ node }) => <FormBlock {...node.fields} />,
     image: ({ node }) => <ImageBlock {...node.fields} />,
   },
 });

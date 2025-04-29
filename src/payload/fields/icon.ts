@@ -17,6 +17,10 @@ export const iconField: Field = {
       value: 'bluesky',
     },
     {
+      label: 'Close',
+      value: 'close',
+    },
+    {
       label: 'Fiverr',
       value: 'fiverr',
     },

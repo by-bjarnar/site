@@ -31,11 +31,14 @@ import sharp from 'sharp';
 import { env } from '@/env/server';
 import { Role } from '@/payload/access';
 import { Articles } from '@/payload/collections/articles';
+import { Clients } from '@/payload/collections/clients';
+import { FormSubmissions } from '@/payload/collections/form-submissions';
+import { Forms } from '@/payload/collections/forms';
 import { Images } from '@/payload/collections/images';
 import { Pages } from '@/payload/collections/pages';
 import { Users } from '@/payload/collections/users';
 import { urlMetadataEndpoint } from '@/payload/endpoints/url-metadata';
-import { richTextFields } from '@/payload/fields/link';
+import { richTextLinkFields } from '@/payload/fields/link';
 import { Footer } from '@/payload/globals/footer';
 import { Navigation } from '@/payload/globals/navigation';
 
@@ -72,7 +75,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Pages, Articles, Images, Users],
+  collections: [Pages, Articles, Clients, Forms, FormSubmissions, Images, Users],
   cors: whitelist,
   csrf: whitelist,
   db: postgresAdapter({
@@ -97,7 +100,7 @@ export default buildConfig({
       AlignFeature(),
       IndentFeature(),
       HorizontalRuleFeature(),
-      LinkFeature({ fields: richTextFields }),
+      LinkFeature({ fields: richTextLinkFields }),
       UploadFeature({ [Images.slug]: Images.fields }),
       FixedToolbarFeature(),
       InlineToolbarFeature(),

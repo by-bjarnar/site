@@ -103,7 +103,7 @@ const fields: Field[] = [
   },
 ];
 
-export const richTextFields: Field[] = fields;
+export const richTextLinkFields: Field[] = fields;
 
 export const linkFields: Field[] = [
   {
