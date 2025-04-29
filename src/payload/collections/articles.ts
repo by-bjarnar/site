@@ -28,7 +28,7 @@ export const Articles: CollectionConfig<'articles'> = {
   },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', '_status', 'featured', 'published', 'updatedAt'],
+    defaultColumns: ['title', '_status', 'published', 'updatedAt'],
   },
   defaultSort: '-published',
   versions: {
@@ -78,7 +78,6 @@ export const Articles: CollectionConfig<'articles'> = {
       type: 'date',
       admin: {
         position: 'sidebar',
-        readOnly: true,
       },
     },
     {
@@ -114,15 +113,6 @@ export const Articles: CollectionConfig<'articles'> = {
             exportName: 'UrlMetadata',
           },
         },
-      },
-    },
-    {
-      name: 'featured',
-      type: 'checkbox',
-      defaultValue: false,
-      admin: {
-        position: 'sidebar',
-        // readOnly: true, // TODO: uncomment when nested field hooks bug is fixed
       },
     },
     {

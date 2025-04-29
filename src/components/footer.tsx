@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import { Button } from '@/components/ui/button';
 import { Icons } from '@/icons';
 import type { PayloadFooterGlobal } from '@/payload/payload-types';
 import { linkProps } from '@/utils/link';
@@ -10,13 +11,16 @@ export function Footer({ socialLinks }: PayloadFooterGlobal) {
       <ul className="flex flex-row gap-1">
         {socialLinks?.map(({ icon, ...link }) => (
           <li key={link.id} className="rounded-sm hover:bg-gold-3">
-            <Link
-              {...linkProps(link)}
-              className="flex items-center justify-center border-0 p-2 text-gold-10 hover:text-gold-11"
-            >
-              <span className="sr-only">{link.text}</span>
-              {icon ? <Icons name={icon} className="size-5" /> : null}
-            </Link>
+            <Button
+              iconPosition="center"
+              variant="tertiary"
+              render={
+                <Link {...linkProps(link)} className="text-gold-11">
+                  <span className="sr-only">{link.text}</span>
+                  {icon ? <Icons name={icon} size="lg" /> : null}
+                </Link>
+              }
+            />
           </li>
         ))}
       </ul>

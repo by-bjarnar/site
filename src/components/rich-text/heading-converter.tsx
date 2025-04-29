@@ -1,21 +1,22 @@
 import type { SerializedHeadingNode } from '@payloadcms/richtext-lexical';
+import { cva } from 'class-variance-authority';
 
 import type { JSXConverter } from '@/components/rich-text';
 import { cn } from '@/utils/cn';
 import { slugify } from '@/utils/slugify';
 
-const headingClasses = (node: SerializedHeadingNode) => {
-  switch (node.tag) {
-    case 'h1':
-      return 'mt-8 mb-6 text-4xl xs:text-5xl';
-    case 'h2':
-      return 'mt-6 mb-4 text-3xl xs:text-4xl';
-    case 'h3':
-      return 'mt-4 mb-2 text-2xl xs:text-3xl';
-    default:
-      return 'mt-2 mb-1 text-xl xs:text-2xl';
-  }
-};
+const headingVariants = cva('first:mt-0 last:mb-0', {
+  variants: {
+    tag: {
+      h1: 'mt-10 mb-6 text-4xl xs:text-5xl',
+      h2: 'mt-8 mb-4 text-3xl xs:text-4xl',
+      h3: 'mt-6 mb-2 text-2xl xs:text-3xl',
+      h4: 'mt-4 mb-1 text-xl xs:text-2xl',
+      h5: 'mt-4 mb-1 text-xl xs:text-2xl',
+      h6: 'mt-4 mb-1 text-xl xs:text-2xl',
+    },
+  },
+});
 
 export const headingConverter: JSXConverter<SerializedHeadingNode> = ({
   additionalClass,
@@ -27,7 +28,7 @@ export const headingConverter: JSXConverter<SerializedHeadingNode> = ({
   <node.tag
     // @ts-expect-error – valid key
     id={slugify(node.children?.map((c) => c.text).join(' '))}
-    className={overrideClass || cn('first:mt-0 last:mb-0', headingClasses(node), additionalClass)}
+    className={overrideClass || cn(headingVariants({ tag: node.tag }), additionalClass)}
   >
     {nodesToJSX({ nodes: node.children, parent })}
   </node.tag>

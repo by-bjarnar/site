@@ -39,14 +39,14 @@ export function PayloadImage({
 
   return (
     <Image
+      {...props}
       src={src}
       width={width}
       height={height}
       placeholder="blur"
       blurDataURL={dataUrl ?? undefined}
       alt={alt}
-      className={cn('rounded-sm', className)}
-      {...props}
+      className={cn('rounded-sm border border-gold-6', className)}
     />
   );
 }

@@ -9,8 +9,20 @@ export const iconField: Field = {
   },
   options: [
     {
+      label: 'Arrow Right',
+      value: 'arrowRight',
+    },
+    {
       label: 'Bluesky',
       value: 'bluesky',
+    },
+    {
+      label: 'Close',
+      value: 'close',
+    },
+    {
+      label: 'Fiverr',
+      value: 'fiverr',
     },
     {
       label: 'Instagram',
