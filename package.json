@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "postbuild": "next-sitemap --config next-sitemap.config.cjs",
     "i:build": "infisical run pnpm build",
     "build:clean": "rm -rf .next && rm -rf next-env.d.ts && pnpm build",
     "i:build:clean": "infisical run pnpm build:clean",
@@ -51,7 +50,6 @@
     "jsonwebtoken": "^9.0.2",
     "nanoid": "^5.1.5",
     "next": "15.3.2",
-    "next-sitemap": "^4.2.3",
     "payload": "3.39.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
