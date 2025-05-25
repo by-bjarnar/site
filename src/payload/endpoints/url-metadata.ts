@@ -1,4 +1,4 @@
-import * as cheerio from 'cheerio';
+import { type CheerioAPI, load } from 'cheerio';
 import type { Endpoint, Payload, PayloadRequest } from 'payload';
 import { headersWithCors } from 'payload';
 
@@ -12,7 +12,7 @@ export interface UrlMetadataResponse {
   site: string;
 }
 
-function extractMetaContent($: cheerio.Root, selectors: string[]): string {
+function extractMetaContent($: CheerioAPI, selectors: string[]): string {
   for (const selector of selectors) {
     const element = $(selector);
 
@@ -37,7 +37,7 @@ async function fetchMetadata(url: string, payload: Payload): Promise<UrlMetadata
     }
 
     const html = await response.text();
-    const $ = cheerio.load(html);
+    const $ = load(html);
 
     const domain = new URL(url).hostname;
     const site = extractMetaContent($, ['meta[property="og:site_name"]']) || domain;
